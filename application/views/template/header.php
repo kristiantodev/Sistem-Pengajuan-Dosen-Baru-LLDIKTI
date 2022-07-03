@@ -63,7 +63,35 @@
                          <div class="dropdown d-inline-block">
                                 <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="mdi mdi-bell-outline"></i>
-                                    <span class="badge-danger badge-pill"><font size="2">3</font> </span>
+                                    <span class="badge-danger badge-pill"><font size="2">
+                                        
+                                        <?php 
+
+                                        if ($this->session->userdata('level') == "Administrator") {
+                                            $fieldName='notif_to';
+                                            $idUserLogin='admin';
+                                            $link='adm';
+                                            $listNotif = $this->db->query("SELECT*FROM notifikasi
+                                              
+                                              LEFT JOIN request_dosen ON request_dosen.id_request=notifikasi.id_request
+                                              LEFT JOIN perguruan_tinggi ON perguruan_tinggi.id_pt=request_dosen.id_pt
+                                              LEFT JOIN user ON request_dosen.id_pt=user.id_pt
+                                              WHERE notifikasi.notif_to='$idUserLogin' AND is_read=0  ORDER BY notifikasi.tgl_notifikasi DESC LIMIT 5 ")->result();
+                                        }else{
+                                            $fieldName='id_pt';
+                                            $link='pt';
+                                            $idUserLogin=$this->session->userdata('id_pt');
+                                            $listNotif = $this->db->query("SELECT*FROM notifikasi                                      
+                                              LEFT JOIN request_dosen ON request_dosen.id_request=notifikasi.id_request
+                                              LEFT JOIN perguruan_tinggi ON perguruan_tinggi.id_pt=request_dosen.id_pt
+                                              LEFT JOIN user ON request_dosen.id_pt=user.id_pt
+                                              WHERE notifikasi.id_pt='$idUserLogin' AND is_read=0  ORDER BY notifikasi.tgl_notifikasi DESC LIMIT 5")->result();
+                                        }
+
+                                        $array = array('is_read' => 0, $fieldName => $idUserLogin);
+  echo $total = $this->db->where($array)->count_all_results('notifikasi');?>
+
+                                    </font> </span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" aria-labelledby="page-header-notifications-dropdown">
                                     <div class="p-3">
@@ -74,44 +102,54 @@
                                         </div>
                                     </div>
                                     <div data-simplebar style="max-height: 230px;">
-                                        <a href="" class="text-reset notification-item">
-                                            <div class="media">
-                                                <div class="avatar-xs mr-3">
-                                                    <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                                        <i class="bx bx-cart"></i>
-                                                    </span>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6 class="mt-0 mb-1">Your order is placed</h6>
-                                                    <div class="font-size-12 text-muted">
-                                                        <p class="mb-1">If several languages coalesce the grammar</p>
-                                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
 
-                                        <a href="" class="text-reset notification-item">
+                                        <?php
+                                             if ($total == 0) {
+                                         ?>
+                                              <center>Tidak ada Pemberitahuan</center>
+                                          <?php
+                                             }else{
+                                         ?>
+
+
+                                         <?php $no=1;
+         foreach ($listNotif as $n): ?>
+
+                                         <a href="<?php echo base_url().$link.'/request_dosen/detail/'.$n->id_request;?>/1" class="text-reset notification-item">
                                             <div class="media">
                                                 <div class="avatar-xs mr-3">
                                                     <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                                        <i class="bx bx-cart"></i>
+                                                        <i class="far fa-bell"></i>
                                                     </span>
                                                 </div>
                                                 <div class="media-body">
-                                                    <h6 class="mt-0 mb-1">Your order is placed</h6>
+                                                    <h6 class="mt-0 mb-1"><?php echo $n->status ?> - <?php echo $n->nm_request ?></h6>
                                                     <div class="font-size-12 text-muted">
-                                                        <p class="mb-1">If several languages coalesce the grammar</p>
-                                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
+
+                                                        <?php if($this->session->userdata('level')=="Administrator"){ ?>
+                                                        <p class="mb-1">Dari : <?php echo $n->nm_user ?> - <?php echo $n->nm_pt ?></p>
+                                                    <?php }else{ ?>
+
+                                                         <p class="mb-1">Dari : Admin</p>
+                                                      
+                                                      <?php }?>
+
+                                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> &nbsp;<?php echo $n->tgl_notifikasi ?></p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </a>
+<?php endforeach; ?>
+                                          <?php
+                                             }
+                                         ?>
+
+        
                                         
                                     </div>
                                     <div class="p-2 border-top">
-                                        <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
-                                            <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
+                                        <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="<?php echo base_url().$link.'/notifikasi'?>">
+                                            <i class="mdi mdi-arrow-right-circle mr-1"></i> Lihat Semua...
                                         </a>
                                     </div>
                                 </div>

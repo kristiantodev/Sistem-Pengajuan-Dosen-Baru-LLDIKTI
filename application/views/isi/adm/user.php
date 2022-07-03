@@ -67,7 +67,7 @@
 
 
                                       <?php if($user->level == "Perguruan Tinggi"){ ?>
-                                               <a data-toggle="modal" data-target="#modal-edit<?php echo $user->id_user ?>" class="btn btn-primary btn-sm waves-effect waves-light"><span data-toggle="tooltip" data-original-title="Ubah"><font color="white"><i class="fas fa-pencil-alt"></i></font></span></a>
+                                               <!-- <a data-toggle="modal" data-target="#modal-edit<?php echo $user->id_user ?>" class="btn btn-primary btn-sm waves-effect waves-light"><span data-toggle="tooltip" data-original-title="Ubah"><font color="white"><i class="fas fa-pencil-alt"></i></font></span></a> -->
                                         <?php } ?>
 
 

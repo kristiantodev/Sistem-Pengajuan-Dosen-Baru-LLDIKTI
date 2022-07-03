@@ -37,6 +37,18 @@
                 </li>
 
                 <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-bookmark"></i>
+                        <span>Permohonan</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="<?php echo site_url();?>adm/request_dosen">Permohonan Baru</a></li>
+                        <li><a href="<?php echo site_url();?>adm/request_dosen/inprogress">Permohonan Inprogress</a></li>
+                        <li><a href="<?php echo site_url();?>adm/request_dosen/close">Permohonan Ditutup</a></li>
+                    </ul>
+                </li>
+
+                <li>
                     <a href="<?php echo site_url();?>adm/user" class=" waves-effect">
                         <i class="fa fa-cogs"></i>
                         <span>Users</span>
@@ -88,17 +100,16 @@
                     </a>
                 </li>
 
-                <!-- <li>
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-inbox-full"></i>
-                        <span>Data Master</span>
+                        <span>Permohonan</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="<?php echo site_url();?>adm/fakultas">Fakultas</a></li>
-                        <li><a href="<?php echo site_url();?>adm/prodi">Program Studi</a></li>
-                        <li><a href="<?php echo site_url();?>adm/pt">Perguruan Tinggi</a></li>
+                        <li><a href="<?php echo site_url();?>pt/request_dosen">Permohonan Baru</a></li>
+                        <li><a href="<?php echo site_url();?>pt/request_dosen/history">Histori Permohonan</a></li>
                     </ul>
-                </li> -->
+                </li>
 
                 <li>
                     <a href="<?php echo site_url();?>pt/ubah_password" class=" waves-effect">

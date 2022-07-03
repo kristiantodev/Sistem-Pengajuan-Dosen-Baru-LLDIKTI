@@ -36,9 +36,9 @@
                       <div class="col-md-8">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title mb-4">Chart Jumlah Dosen Berdasarkan Golongan</h4>
+                                    <h4 class="card-title mb-4">Chart Penanganan Request Permohonan Dosen</h4>
 
-                                    <canvas id="chart_1" height="125"></canvas>
+                                    <canvas id="chart_request" height="125"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -49,3 +49,90 @@
           <script src="<?= base_url('assets/')?>libs/jquery/jquery.min.js"></script>
               <script src="<?php echo base_url();?>assets/Chart.min.js"></script>
            <script src="<?php echo base_url();?>assets/widget-charts2.js"></script>                     
+<script>
+    
+$(function () {
+
+'use strict';
+
+    if( $('#chart_request').length > 0 ){
+    var ctx2 = document.getElementById("chart_request").getContext("2d");
+    var data2 = {
+      labels: [
+                <?php foreach ($request_dosenList as $grafik): ?>
+          "<?php echo $grafik->status; ?>",
+         <?php endforeach; ?>
+            ],
+      datasets: [
+      {
+        label: "Jumlah",
+        backgroundColor: "#05b085",
+        borderColor: "#05b085",
+        data: [
+                    <?php foreach ($request_dosenList as $grafikCount): ?>
+                    <?php echo $grafikCount->jumlah ?>,
+
+                    <?php endforeach; ?>
+                ]
+      }
+      ]
+    };
+    
+    var hBar = new Chart(ctx2, {
+      type:"bar",
+      data:data2,
+      
+      options: {
+        tooltips: {
+          mode:"label"
+        },
+        scales: {
+          yAxes: [{
+            stacked: true,
+            gridLines: {
+              color: "rgba(135,135,135,0)",
+            },
+            ticks: {
+              fontFamily: "Poppins",
+              fontColor:"#878787"
+            }
+          }],
+          xAxes: [{
+            stacked: true,
+            gridLines: {
+              color: "rgba(135,135,135,0)",
+            },
+            ticks: {
+              fontFamily: "Poppins",
+              fontColor:"#878787"
+            }
+          }],
+          
+        },
+        elements:{
+          point: {
+            hitRadius:40
+          }
+        },
+        animation: {
+          duration: 3000
+        },
+        responsive: true,
+        maintainAspectRatio:false,
+        legend: {
+          display: false,
+        },
+        
+        tooltip: {
+          backgroundColor:'rgba(33,33,33,1)',
+          cornerRadius:0,
+          footerFontFamily:"'Poppins'"
+        }
+        
+      }
+    });
+  }
+    
+
+  }); // End of use strict
+    </script>        

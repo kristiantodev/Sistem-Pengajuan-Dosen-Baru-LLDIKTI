@@ -15,13 +15,14 @@ class Dashboard extends My_Controller {
 
 	public function index()
 	{
-  
-      
-         $dataArray=array(
-            "periodeku" => ''
-                  );
-        // var_dump($dataArray);die;
-		 $this->Mypage('isi/adm/dashboard', $dataArray);
+
+      $request_dosen = $this->db->query("SELECT COUNT(*) as jumlah, status FROM request_dosen GROUP BY status")->result();
+
+         $data=array(
+            "request_dosenList"=>$request_dosen,
+        );
+   
+		 $this->Mypage('isi/adm/dashboard', $data);
 	}
 
     
