@@ -145,7 +145,14 @@ function tgl_indo($tanggal){
                                     <tr>
                                     <td>Dosen Rekomendasi</td>
                                     <td>:</td>
-                                    <td><?php echo $requestDetail->nm_dosen;?></td>
+                                    <td>
+
+                                    <?php if($requestDetail->nm_dosen != ""){ ?>
+                                        <?php echo $requestDetail->nm_dosen;?>&nbsp;<a data-toggle="modal" data-target="#modal-profil"><button type="button" class="btn btn-info btn-sm waves-effect waves-light">
+                                    <i class="fas fa-user"></i> &nbsp;Lihat Profil</button></a>
+                                    <?php } ?>
+                                  
+                                  </td>
                                   </tr>
 
                                   <tr>
@@ -293,6 +300,219 @@ function tgl_indo($tanggal){
     <!-- /.modal-dialog -->
   </div>
   <!-- /.modal -->
+
+
+  <div class="modal fade text-left" id="modal-profil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h6 class="modal-title"><font color='white'>Profil Dosen - <?=$f->nm_dosen;?></font></h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <input type="hidden" readonly value="<?=$f->id_dosen;?>" name="id_dosen" class="form-control" >
+      <input type="hidden" name="old_image" value="<?php echo $f->foto ?>"/>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-6">
+
+
+            <div class="row">
+             <div class="col-lg-6 col-md-6 col-6">
+              <fieldset class="form-group floating-label-form-group">
+                <label for="email">NIP</label>
+                <input type="text" name="nip" disabled value="<?=$f->nip;?>" class="form-control" required oninvalid="this.setCustomValidity('Harap Diisi...')" oninput="setCustomValidity('')">
+              </fieldset>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-6">
+              <fieldset class="form-group floating-label-form-group">
+                <label for="email">No Registasi Pendidik</label>
+                <input type="text" name="no_registrasi" disabled value="<?=$f->no_registrasi;?>" class="form-control" required oninvalid="this.setCustomValidity('Harap Diisi...')" oninput="setCustomValidity('')">
+              </fieldset>
+            </div>
+          </div>
+          <br>
+           <div class="row">
+         <div class="col-lg-4 col-md-6 col-6">
+          <center>
+          <img src="<?php echo base_url('assets/images/dosen/'.$f->foto) ?>" alt="" height="75" width="70"></center>
+        </div>
+
+        <div class="col-lg-8 col-md-6 col-6">
+          <fieldset class="form-group floating-label-form-group">
+            <label for="email">Nama Dosen</label>
+            <input type="text" name="nm_dosen" disabled value="<?=$f->nm_dosen;?>" class="form-control" required oninvalid="this.setCustomValidity('Harap Diisi...')" oninput="setCustomValidity('')">
+          </fieldset>
+
+        </div>
+      </div>
+
+<br>
+          
+          <div class="row">
+           <div class="col-lg-6 col-md-6 col-6">
+            <fieldset class="form-group floating-label-form-group">
+              <label for="email">Tempat Lahir</label>
+              <input type="text" name="tempat_lahir" disabled value="<?=$f->tempat_lahir;?>" class="form-control" required oninvalid="this.setCustomValidity('Harap Diisi...')" oninput="setCustomValidity('')">
+            </fieldset>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-6">
+            <fieldset class="form-group floating-label-form-group">
+              <label for="email">Tanggal Lahir</label>
+              <input type="date" name="tgl_lahir" disabled value="<?=$f->tgl_lahir;?>" class="form-control" required oninvalid="this.setCustomValidity('Harap Diisi...')" oninput="setCustomValidity('')">
+            </fieldset>
+          </div>
+        </div>
+
+
+        <fieldset class="form-group floating-label-form-group">
+          <label for="email">Status Dosen</label>
+          <select name="status_dosen" disabled id="select" required class="custom-select">
+            <?php if ($f->status_dosen == "Aktif"){ ?>
+             <option value="Aktif" selected>Aktif</option>
+             <option value="Tidak Aktif">Tidak Aktif</option>
+           <?php }else{ ?>
+             <option value="Aktif">Aktif</option>
+             <option value="Tidak Aktif" selected>Tidak Aktif</option>
+           <?php } ?>
+         </select>
+       </fieldset>
+    </div>
+    <div class="col-lg-6 col-md-6 col-6">
+
+      <fieldset class="form-group floating-label-form-group">
+        <label for="email">Perguruan Tinggi Asal</label>
+        <select name="id_pt" disabled id="select" required class="custom-select">
+          <option value="">-- Perguruan Tinggi --</option>
+
+          <?php foreach ($ptList as $pt): ?>
+            <option value="<?php echo $pt->id_pt ?>"
+
+              <?php
+              if ($f->id_pt == $pt->id_pt){
+                echo "selected";
+              }else{
+                echo "";
+              }
+              ?>
+
+              ><?php echo $pt->nm_pt ?></option>
+            <?php endforeach; ?>
+          </select>
+        </fieldset>
+
+
+        <div class="row">
+         <div class="col-lg-6 col-md-6 col-6">
+          <fieldset class="form-group floating-label-form-group">
+            <label for="email">Specialist</label>
+            <select name="id_prodi" disabled id="select" required class="custom-select">
+              <option value="">-- Pilih Prodi --</option>
+
+              <?php foreach ($prodiList as $pr): ?>
+                <option value="<?php echo $pr->id_prodi ?>"
+
+                 <?php
+                 if ($f->id_prodi == $pr->id_prodi){
+                  echo "selected";
+                }else{
+                  echo "";
+                }
+                ?>
+
+                ><?php echo $pr->jenjang ?>-<?php echo $pr->nm_prodi ?></option>
+              <?php endforeach; ?>
+            </select>
+          </fieldset>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-6">
+          <fieldset class="form-group floating-label-form-group">
+            <label for="email">Jabatan</label>
+            <select name="jabatan" disabled id="select" required class="custom-select">
+              <option value="">-- Pilih Jabatan --</option>
+
+              <?php foreach ($jabatanList as $p): ?>
+                <option value="<?php echo $p->nm_jabatan ?>"
+
+                  <?php
+                  if ($f->jabatan == $p->nm_jabatan){
+                    echo "selected";
+                  }else{
+                    echo "";
+                  }
+                  ?>
+
+                  ><?php echo $p->nm_jabatan ?></option>
+                <?php endforeach; ?>
+              </select>
+            </fieldset>
+
+          </div>
+        </div>
+
+        <div class="row">
+         <div class="col-lg-6 col-md-6 col-6">
+          <fieldset class="form-group floating-label-form-group">
+            <label for="email">Pendidikan Terakhir</label>
+            <input type="text" name="last_edu" disabled value="<?=$f->last_edu;?>" class="form-control">
+          </fieldset>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-6">
+          <fieldset class="form-group floating-label-form-group">
+            <label for="email">Tahun Lulus</label>
+            <input type="text" name="tahun_lulus" disabled value="<?=$f->tahun_lulus;?>" class="form-control">
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="row">
+       <div class="col-lg-6 col-md-6 col-6">
+        <fieldset class="form-group floating-label-form-group">
+          <label for="email">Tanggal Tmp Dosen</label>
+          <input type="date" name="tmp_dosen" disabled value="<?=$f->tmp_dosen;?>" class="form-control">
+        </fieldset>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-6">
+        <fieldset class="form-group floating-label-form-group">
+          <label for="email">Angka Kredit</label>
+          <input type="number" name="angka_kredit" disabled value="<?=$f->angka_kredit;?>" class="form-control">
+        </fieldset>
+      </div>
+    </div>
+
+    <fieldset class="form-group floating-label-form-group">
+      <label for="email">Jenis Ikatan</label>
+      <select name="jenis_ikatan" disabled id="select" class="custom-select">
+        <option value="">-- Pilih Jenis Ikatan--</option>
+
+        <?php foreach ($ikatanList as $k): ?>
+          <option value="<?php echo $k->nm_ikatan ?>"
+            <?php
+            if ($f->jenis_ikatan == $p->nm_ikatan){
+              echo "selected";
+            }else{
+              echo "";
+            }
+            ?>
+            ><?php echo $k->nm_ikatan ?></option>
+          <?php endforeach; ?>
+        </select>
+      </fieldset>
+
+    </div>
+  </div>
+
+</div>
+
+</div>
+</div>
+</div>
   
 
   <script>

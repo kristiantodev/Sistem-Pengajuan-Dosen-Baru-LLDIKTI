@@ -115,8 +115,25 @@ public function detail($id=null, $action=null){
         LEFT JOIN dosen ON dosen.id_dosen=request_dosen.id_dosen
         WHERE request_dosen.id_request='$id'")->row();
 
+        $idDosen = $request_dosen->id_dosen;
+
+$dosen = $this->db->query("SELECT*FROM dosen
+LEFT JOIN prodi ON prodi.id_prodi=dosen.id_prodi
+LEFT JOIN perguruan_tinggi ON perguruan_tinggi.id_pt=dosen.id_pt
+WHERE dosen.id_dosen='$idDosen'");
+
+$prodi = $this->db->query("SELECT*FROM prodi WHERE deleted=0");
+$pt = $this->db->query("SELECT*FROM perguruan_tinggi WHERE deleted=0");
+$jabatan = $this->db->query("SELECT*FROM jabatan");
+$ikatan = $this->db->query("SELECT*FROM jenis_ikatan");
+
     $data=array(
         "requestDetail"=>$request_dosen,
+        "f"=>$dosen->row(),
+            "prodiList"=>$prodi->result(),
+            "jabatanList"=>$jabatan->result(),
+            "ikatanList"=>$ikatan->result(),
+            "ptList"=>$pt->result(),
     );
 
     if ($action != null) {
