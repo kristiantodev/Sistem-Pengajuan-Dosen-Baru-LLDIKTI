@@ -115,7 +115,7 @@
                                          <?php $no=1;
          foreach ($listNotif as $n): ?>
 
-                                         <a href="<?php echo base_url().$link.'/request_dosen/detail/'.$n->id_request;?>/1" class="text-reset notification-item">
+                                         <a href="<?php echo base_url().$link.'/request_dosen/detail/'.$n->id_request.'/'.$n->id_notifikasi?>" class="text-reset notification-item">
                                             <div class="media">
                                                 <div class="avatar-xs mr-3">
                                                     <span class="avatar-title bg-primary rounded-circle font-size-16">
@@ -123,7 +123,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="media-body">
-                                                    <h6 class="mt-0 mb-1"><?php echo $n->status ?> - <?php echo $n->nm_request ?></h6>
+                                                    <h6 class="mt-0 mb-1"><?php echo $n->status_request ?> - <?php echo $n->nm_request ?></h6>
                                                     <div class="font-size-12 text-muted">
 
                                                         <?php if($this->session->userdata('level')=="Administrator"){ ?>

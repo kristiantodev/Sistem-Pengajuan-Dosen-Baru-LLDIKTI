@@ -120,13 +120,13 @@ public function detail($id=null, $action=null){
     );
 
     if ($action != null) {
-         $notif=array(
-        "is_read"=>1
-    );
-    $this->db->where('id_request', $id);
-    $this->db->update('notifikasi',$notif);
+        $notif = array(
+       "is_read"=>1
+        );
+   $this->db->where('id_notifikasi', $action);
+   $this->db->update('notifikasi',$notif);
 
-    }
+   }
 
     $this->Mypage('isi/pt/detail_request',$data);
 }

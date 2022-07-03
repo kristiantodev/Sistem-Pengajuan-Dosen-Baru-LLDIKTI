@@ -59,7 +59,7 @@ function tgl_indo($tanggal){
 
                  ?>
 
-                 <a href="<?php echo base_url().'adm/request_dosen/detail/'.$n->id_request;?>/1" class="text-reset notification-item">
+                 <a href="<?php echo base_url().'adm/request_dosen/detail/'.$n->id_request.'/'.$n->id_notifikasi?>" class="text-reset notification-item">
 
               <div class="alert alert-<?=$color;?>" role="alert">
                                 <h6><b>

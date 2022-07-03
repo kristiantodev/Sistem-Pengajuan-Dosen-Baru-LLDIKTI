@@ -82,7 +82,7 @@ class Request_dosen extends My_Controller {
          $notif=array(
         "is_read"=>1
     );
-    $this->db->where('id_request', $id);
+    $this->db->where('id_notifikasi', $action);
     $this->db->update('notifikasi',$notif);
 
     }
