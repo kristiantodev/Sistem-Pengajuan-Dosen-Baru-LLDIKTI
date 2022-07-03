@@ -49,6 +49,13 @@
                 </li>
 
                 <li>
+                    <a href="<?php echo site_url();?>adm/laporan" class=" waves-effect">
+                        <i class="fas fa-book"></i>
+                        <span>Laporan</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="<?php echo site_url();?>adm/user" class=" waves-effect">
                         <i class="fa fa-cogs"></i>
                         <span>Users</span>
@@ -109,6 +116,13 @@
                         <li><a href="<?php echo site_url();?>pt/request_dosen">Permohonan Baru</a></li>
                         <li><a href="<?php echo site_url();?>pt/request_dosen/history">Histori Permohonan</a></li>
                     </ul>
+                </li>
+
+                <li>
+                    <a href="<?php echo site_url();?>pt/laporan" class=" waves-effect">
+                        <i class="fas fa-book"></i>
+                        <span>Laporan</span>
+                    </a>
                 </li>
 
                 <li>
