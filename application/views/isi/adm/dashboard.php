@@ -38,7 +38,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title mb-4">Chart Penanganan Request Permohonan Dosen</h4>
 
-                                    <canvas id="chart_request" height="125"></canvas>
+                                    <canvas id="chart_request" height="165"></canvas>
                                 </div>
                             </div>
                         </div>
