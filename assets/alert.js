@@ -37,4 +37,16 @@ if(flashData == "berhasil"){
         text: 'Password Baru sama dengan Password Lama !',
         type: 'error'
 	});
+}else if(flashData == "gagalDuplikat"){
+	swal({
+        title: 'Gagal',
+        text: 'Perguruan Tinggi Sudah Mempunyai akun!',
+        type: 'error'
+	});
+}else if(flashData == "gagalHapus"){
+	swal({
+        title: 'Gagal',
+        text: 'Perguruan Tinggi tidak dapat dihapus!',
+        type: 'error'
+	});
 }

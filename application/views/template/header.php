@@ -166,7 +166,7 @@
                             <div class="navbar-brand-box">
                                 <center>
                                 <a href="#" class="logo logo-light">
-                                    <img src="<?php echo base_url();?>assets/images/logo2.png" alt="" height="75">
+                                    <img src="<?php echo base_url();?>assets/images/logo.png" alt="" height="75">
                                 </a>
                                 </center>
                             </div>

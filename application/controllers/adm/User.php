@@ -42,6 +42,12 @@ class User extends My_Controller {
                 $pt = 0;
             }else{
                 $pt = $_POST['id_pt'];   
+                $cekQount = $this->db->query("SELECT COUNT(*) as jumlah FROM user WHERE id_pt = '$pt'")->row();
+                if($cekQount->jumlah != 0){
+                    $this->session->set_flashdata('sukses',"gagalDuplikat");
+                    redirect('adm/user');
+                }
+            
             }
             $pass = password_hash ($_POST['password'], PASSWORD_DEFAULT);
             $data=array(
@@ -89,6 +95,12 @@ public function hapus($id)
             $this->session->set_flashdata('error',"Data Gagal Di Hapus");
             redirect('adm/alumni');
         }else{
+            $cekQount = $this->db->query("SELECT COUNT(*) as jumlah FROM request_dosen
+            LEFT JOIN user ON request_dosen.id_pt=user.id_pt WHERE user.id_user = '$id'")->row();
+                if($cekQount->jumlah != 0){
+                    $this->session->set_flashdata('sukses',"gagalHapus");
+                    redirect('adm/user');
+                }
             $this->db->where('id_user', $id);
             $this->db->delete('user');
             $this->session->set_flashdata('sukses',"hapus");

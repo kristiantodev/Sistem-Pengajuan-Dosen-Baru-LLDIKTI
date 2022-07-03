@@ -101,7 +101,7 @@ function tgl_indo($tanggal){
                                             $icon="fas fa-clock";
                                             $btn="btn btn-warning btn-sm";
                                             $remark="Proses - Menunggu Proses Verifikasi";
-                                            $isDisabled="";
+                                            $isDisabled="disabled";
                                       }else if($requestDetail->status == "Revisi"){
                                             $icon="fas fa-info-circle";
                                             $btn="btn btn-warning btn-sm";
