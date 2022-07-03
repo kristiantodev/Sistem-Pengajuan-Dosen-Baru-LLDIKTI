@@ -84,7 +84,7 @@ function tgl_indo($tanggal){
             <center><h4>LAPORAN PERMOHONAN PENGAJUAN DOSEN <br> Lembaga Layanan Pedidikan Tinggi Wilayah II (LLDIKTI) Kota Palembang<br>
                        <br> Tanggal : <?php echo tgl_indo($tgl_mulai); ?> s/d <?php echo tgl_indo($tgl_sampai); ?><br></h4></center>
 <hr/>
-            <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+            <table border="1" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead bgcolor="">
                                                 <tr>
                                     <th width="9"><b>No</b></th>
