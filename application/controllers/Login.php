@@ -36,10 +36,9 @@ public function __construct()
 
         $array = array('username' => $userku);
         $user_auth = $this->db->get_where('user', $array)->row_array();
-
+        
         if($user_auth){
-                
-               if(password_verify($passku, $user_auth['password'])){
+               if($passku === $user_auth['password']){
 
                 $data = [
                 'id_user' => $user_auth['id_user'],

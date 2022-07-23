@@ -49,7 +49,7 @@ class User extends My_Controller {
                 }
             
             }
-            $pass = password_hash ($_POST['password'], PASSWORD_DEFAULT);
+            $pass = $_POST['password'];
             $data=array(
                 "id_user" => $idku,
                 "username"=>$_POST['username'],

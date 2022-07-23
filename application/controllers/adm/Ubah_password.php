@@ -43,7 +43,7 @@ public function index()
             $lama = $this->input->post('current_password');
             $baru = $this->input->post('pass_baru');
             $baru2 = $this->input->post('pass_baru2');
-        if(!password_verify($lama, $data['passwordku']['password'])){
+        if($lama !== $data['passwordku']['password']){
               $this->session->set_flashdata('success', 'Password lama yang anda Masukan salah !! ');
               redirect(site_url('adm/ubah_password'));
             }else{
@@ -51,7 +51,7 @@ public function index()
                 $this->session->set_flashdata('success', 'Password Baru sama dengan Password Lama !! ');
                 redirect(site_url('adm/ubah_password'));
                }else{
-                $password_hash =password_hash($baru, PASSWORD_DEFAULT);
+                $password_hash = $baru;
                 $this->db->set('password', $password_hash);
                 $this->db->where('id_user', $this->session->userdata('id_user'));
                 $this->db->update('user');
